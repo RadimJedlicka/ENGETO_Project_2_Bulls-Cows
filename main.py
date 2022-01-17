@@ -7,7 +7,6 @@ from time import time
 
 separator = '-' * 47
 generator = sample((range(1, 10)), 4)
-print(generator)
 
 
 def string_to_list(sequence):
@@ -86,6 +85,7 @@ def is_input_suitable(enter='Enter a number: '):
         else:
             print(f'!!! Wrong input !!!'.upper(), '\n'
                   f'Must be 4 numbers, not start with 0 and must be unique')
+            print(separator)
 
 
 def input_control(guess) -> bool:
