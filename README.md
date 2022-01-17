@@ -1,5 +1,4 @@
 # ENGETO_Project_2_Bulls-Cows
-Bulls &amp; Cows game
 
 Tvým úkolem bude vytvořit program, který by simuloval hru Bulls and Cows.
 Po vypsání úvodního textu uživateli, může hádání tajného čtyřciferného čísla začít.
