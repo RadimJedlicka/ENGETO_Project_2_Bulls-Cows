@@ -1,38 +1,106 @@
-# Tvým úkolem bude vytvořit program, který by simuloval hru Bulls and Cows.
-# Po vypsání úvodního textu uživateli, může hádání tajného čtyřciferného čísla začít.
+# TODO save statistics of counter to a file (date, time, counter)
 
-# Program bude obsahovat:
-# 1. Program pozdraví užitele a vypíše úvodní text -> DONE
-# 2. Program dále vytvoří tajné 4místné číslo (číslice musí být unikátní a nesmí začínat 0) -> DONE
-# TODO 3. Hráč hádá číslo. Program jej upozorní, pokud zadá číslo kratší nebo delší než 4 čísla,
-#    pokud bude obsahovat duplicity, začínat nulou, příp. obsahovat nečíselné znaky
-# TODO 4. Program vyhodnotí tip uživatele
 
-# Program dále vypíše počet bull/ bulls (pokud uživatel uhodne jak číslo, tak jeho umístění),
-# příp. cows/ cows (pokud uživatel uhodne pouze číslo, ale ne jeho umístění).
-# Vrácené ohodnocení musí brát ohled na jednotné a množné číslo ve výstupu.
-# Tedy 1 bull a 2 bulls (stejně pro cow/cows).
+from random import sample
+from time import time
 
-from random import randint
 
 separator = '-' * 47
-generator = randint(1000, 9999)
-# TODO osetrit, aby cislice z generatoru byly unikatni - to same entry
+generator = sample((range(1, 10)), 4)
+print(generator)
+
+
+def string_to_list(sequence):
+    numbers = []
+    for num in sequence:
+        numbers.append(str(num))
+    return numbers
+
+
+def main():
+    generated = string_to_list(generator)
+    bulls = 0
+    cows = 0
+    counter = 1
+    start = time()
+
+    while True:
+
+        print(separator)
+        guess = is_input_suitable()
+        # print(separator)
+
+        if guess == ''.join(generated):
+            break
+
+        is_there_number(guess, cows, bulls, generated)
+        counter += 1
+
+    print(separator)
+    final_message(counter)
+    end = time()
+    timer = (end-start)
+    print(f'The game took you {timer} seconds.')
+
+
+def is_there_number(guess, cows, bulls, generated):
+    for index, num in enumerate(guess):
+        if num in generated and guess[index] == generated[index]:
+            bulls += 1
+        elif num in generated:
+            cows += 1
+    return attempts_messages(cows, bulls)
+
+
+def attempts_messages(cows, bulls) -> None:
+    if cows == 1:
+        print(f'Cow: {cows}, Bulls: {bulls}')
+    elif bulls == 1:
+        print(f'Cows: {cows}, Bull: {bulls}')
+    elif cows == 1 and bulls == 1:
+        print(f'Cow: {cows}, Bull: {bulls}')
+    else:
+        print(f'Cows: {cows}, Bulls: {bulls}')
+
+
+def final_message(counter):
+    if counter == 1:
+        print(f' WINNER, it took you only {counter} attempt '.center(len(separator), '*'))
+        print(f' That is pure luck ;-) '.center(len(separator), '*'))
+    elif counter <= 5:
+        print(f' WINNER, it took you {counter} attempts '.center(len(separator), '*'))
+        print(f' That is fantastic result ;-) '.center(len(separator), '*'))
+    elif counter <= 10:
+        print(f' WINNER, it took you {counter} attempts '.center(len(separator), '*'))
+        print(f' You are a good player '.center(len(separator), '*'))
+    else:
+        print(f' WINNER, it took you {counter} attempts '.center(len(separator), '*'))
+        print(f' You can do better next time ;-) '.center(len(separator), '*'))
+
+
+def is_input_suitable(enter='Enter a number: '):
+    while True:
+        guess = (input(enter))
+        if input_control(guess):
+            return guess
+        else:
+            print(f'!!! Wrong input !!!'.upper(), '\n'
+                  f'Must be 4 numbers, not start with 0 and must be unique')
+
+
+def input_control(guess) -> bool:
+    return guess.isdigit() \
+           and not guess.startswith('0') \
+           and (len(guess) == 4) \
+           and len(guess) == len(set(guess))
+
 
 def intro() -> None:
     print('Hi there!')
     print(separator)
     print('I\'ve generated a random 4 digit number for you. \n'
           'Let\'s play a bulls and cows game.')
-    print(separator)
 
 
-def input_control():
-    entry = '1669'
-    if entry.isnumeric() and not entry.startswith('0') and (len(entry) == 4):
-        return True
-    else:
-        return False
-
-# intro()
-print(input_control())
+intro()
+main()
