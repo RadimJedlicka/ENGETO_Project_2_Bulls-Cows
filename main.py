@@ -1,19 +1,32 @@
 # TODO save statistics of counter to a file (date, time, counter)
 
 
-from random import sample
+from random import randrange
 from time import time
 
 
 separator = '-' * 47
-generator = sample((range(1, 10)), 4)
+magic_number = []
+
+
+def generator():
+    for i in range(4):
+        x = randrange(0, 9)
+        magic_number.append(x)
+    if magic_number[0] == 0 or \
+            (len(magic_number) != len(set(magic_number))):
+        magic_number.clear()
+        generator()
+
+
+generator()
 
 
 def string_to_list(sequence):
-    numbers = []
+    numb = []
     for num in sequence:
-        numbers.append(str(num))
-    return numbers
+        numb.append(str(num))
+    return numb
 
 
 def intro() -> None:
@@ -24,7 +37,7 @@ def intro() -> None:
 
 
 def main():
-    generated = string_to_list(generator)
+    generated = string_to_list(magic_number)
     bulls = 0
     cows = 0
     counter = 1
