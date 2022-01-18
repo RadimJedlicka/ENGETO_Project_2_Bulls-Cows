@@ -16,6 +16,13 @@ def string_to_list(sequence):
     return numbers
 
 
+def intro() -> None:
+    print('Hi there!')
+    print(separator)
+    print('I\'ve generated a random 4 digit number for you. \n'
+          'Let\'s play a bulls and cows game.')
+
+
 def main():
     generated = string_to_list(generator)
     bulls = 0
@@ -93,13 +100,6 @@ def input_control(guess) -> bool:
            and not guess.startswith('0') \
            and (len(guess) == 4) \
            and len(guess) == len(set(guess))
-
-
-def intro() -> None:
-    print('Hi there!')
-    print(separator)
-    print('I\'ve generated a random 4 digit number for you. \n'
-          'Let\'s play a bulls and cows game.')
 
 
 intro()
