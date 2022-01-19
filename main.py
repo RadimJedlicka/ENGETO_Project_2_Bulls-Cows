@@ -20,6 +20,7 @@ def generator():
 
 
 generator()
+# print(magic_number)
 
 
 def string_to_list(sequence):
@@ -59,7 +60,7 @@ def main():
     final_message(counter)
     end = time()
     timer = (end-start)
-    print(f'The game took you {timer} seconds.')
+    print(f'The game took you {timer:.2f} seconds.')
 
 
 def is_there_number(guess, cows, bulls, generated):
