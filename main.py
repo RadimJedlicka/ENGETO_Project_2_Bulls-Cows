@@ -89,15 +89,17 @@ def final_message(counter):
         print(f' That is pure luck ;-) '.center(len(separator), '*'))
     elif counter <= 5:
         winner_message(counter)
+        print(f' That is fantastic result! '.center(len(separator), '*'))
     elif counter <= 10:
         winner_message(counter)
+        print(f' That is very good result! '.center(len(separator), '*'))
     else:
         winner_message(counter)
+        print(f' You can do better next time ;-) '.center(len(separator), '*'))
 
 
 def winner_message(counter):
     print(f' WINNER, it took you {counter} attempts '.center(len(separator), '*'))
-    print(f' That is fantastic result ;-) '.center(len(separator), '*'))
 
 
 def is_input_suitable(enter='Enter a number: '):
