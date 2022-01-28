@@ -73,12 +73,12 @@ def is_there_number(guess, cows, bulls, generated):
 
 
 def attempts_messages(cows, bulls) -> None:
-    if cows == 1:
-        print(f'Cow: {cows}, Bulls: {bulls}')
+    if cows == 1 and bulls == 1:
+        print(f'Cow: {cows}, Bull: {bulls}')
     elif bulls == 1:
         print(f'Cows: {cows}, Bull: {bulls}')
-    elif cows == 1 and bulls == 1:
-        print(f'Cow: {cows}, Bull: {bulls}')
+    elif cows == 1:
+        print(f'Cow: {cows}, Bulls: {bulls}')
     else:
         print(f'Cows: {cows}, Bulls: {bulls}')
 
